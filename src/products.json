@@ -1,0 +1,28 @@
+{
+    "products": [
+    {
+        "id": 1,
+        "name": "Beef Patty",
+        "image": "",
+        "price": 12,
+        "quantity": 1,
+        "selected": false
+    },
+    {
+        "id": 2,
+        "name": "Chicken Patty",
+        "image": "",
+        "price": 12,
+        "quantity": 1,
+        "selected": false
+    },
+    {
+        "id": 3,
+        "name": "Chicken and Cheese",
+        "image": "",
+        "price": 14,
+        "quantity": 1,
+        "selected": false
+    }
+]
+}
