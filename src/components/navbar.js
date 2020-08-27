@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
- const Navbar = ()=>{
+import { Link } from 'react-router-dom';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
+ const Navbar = () =>{
     return(
             <nav className="nav-wrapper">
                 <div className="container">
@@ -11,7 +13,7 @@ import { Link } from 'react-router-dom'
                         <li><Link to="/products">Products</Link></li>
                         <li><Link to="/contact">Contact</Link></li>
                         {/* dropdown? */}
-                        <li><Link to=""><i className="material-icons">shopping_cart</i></Link></li>
+                        <li><ShoppingCartIcon to=""><i className="material-icons">ShoppingCartIcon</i></ShoppingCartIcon></li>
                     </ul>
                 </div>
             </nav>  

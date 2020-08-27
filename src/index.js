@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import allReducer from '../reducers/reducer/allReducer'
+import allReducer from './reducers/reducer'
 import { Provider } from 'react-redux'
 import {createStore} from 'redux';
 
@@ -30,9 +30,7 @@ import {createStore} from 'redux';
 // //Dispatch
 // store.dispatch(increment());
 
-const store = createStore(
-  allReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+const store = createStore(allReducer);
 
 
 
