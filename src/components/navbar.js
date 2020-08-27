@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -22,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
- const Navbar = () =>{
+ const Navbar = (state) =>{
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -34,6 +38,51 @@ const useStyles = makeStyles((theme) => ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  let addedItems = state.products.length ?
+  (  
+      state.products.map(products=>{
+          return(
+             
+              <li className="collection-item avatar" key={products.id}>
+                      
+                          <div className="item-desc">
+                              <span className="title">{products.name}</span>
+                              <p><b>Price: {products.price}$</b></p> 
+                              <p>
+                                  <b>Quantity: {products.quantity}</b> 
+                              </p>
+                              <div className="add-remove">
+                                <IconButton >
+                                    <ArrowDropUpIcon />
+                                </IconButton>
+                                <IconButton >
+                                    <ArrowDropDownIcon />
+                                </IconButton>
+                              </div>
+                                <IconButton >
+                                    <HighlightOffIcon />
+                                </IconButton>
+                          </div>
+                          
+                     </li>                        
+          )
+      })
+  ):
+
+   (
+      <p>Nothing.</p>
+   )
+// return(
+//   <div className="container">
+//       <div className="cart">
+//           <h5>You have ordered:</h5>
+//           <ul className="collection">
+//               {addedItems}
+//           </ul>
+//       </div>  
+//   </div>
+// )
 
     return(
             // <nav className="nav-wrapper">
@@ -71,9 +120,14 @@ const useStyles = makeStyles((theme) => ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <div>
+            <div>
+                <h5>You have ordered:</h5>
+                <ul>
+                    {addedItems}
+                </ul>
+            </div>
+        </div>
       </Menu>
       
     </div>
@@ -86,4 +140,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default Navbar;
+export default connect(mapStateToProps)(Navbar);
