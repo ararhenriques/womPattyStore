@@ -1,4 +1,4 @@
-import { REMOVE_FROM_CART, SUB_QUANTITY, EMPTY_CART, ADD_QUANTITY } from "./actionTypes";
+import {  ADD_TO_CART, REMOVE_FROM_CART, SUB_QUANTITY, EMPTY_CART, ADD_QUANTITY } from "./actionTypes";
 
 export const addToCart = id => {
     return {
