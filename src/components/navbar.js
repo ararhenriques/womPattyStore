@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import {removeFromCart, subQuantity, addQuantity} from '../actions/actions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,6 +40,18 @@ const useStyles = makeStyles((theme) => ({
     setAnchorEl(null);
   };
 
+  const handleRemove = (id) =>{
+      state.removeFromCart(id)
+  };
+
+  const handleSubQuantity = (id) =>{
+    state.subQuantity(id)
+    };
+
+   const handleAddQuantity = (id) =>{
+    state.addQuantity(id)
+    };
+
   let addedItems = state.products.length ?
   (  
       state.products.map(products=>{
@@ -54,13 +67,13 @@ const useStyles = makeStyles((theme) => ({
                               </p>
                               <div className="add-remove">
                                 <IconButton >
-                                    <ArrowDropUpIcon />
+                                    <ArrowDropUpIcon onClick={()=>{this.handleAddQuantity(products.id)}} />
                                 </IconButton>
-                                <IconButton >
+                                <IconButton onClick={()=>{this.handleSubtractQuantity(products.id)}}>
                                     <ArrowDropDownIcon />
                                 </IconButton>
                               </div>
-                                <IconButton >
+                                <IconButton onClick={()=>{this.handleRemove(products.id)}}>
                                     <HighlightOffIcon />
                                 </IconButton>
                           </div>
@@ -140,4 +153,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        removeFromCart: (id)=>{dispatch(removeFromCart(id))},
+        addQuantity: (id)=>{dispatch(addQuantity(id))},
+        subQuantity: (id)=>{dispatch(subQuantity(id))}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

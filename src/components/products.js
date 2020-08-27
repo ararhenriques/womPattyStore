@@ -39,7 +39,7 @@ class Products extends Component{
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" onClick={this.handleClick(products.id)}>
                     Add to cart
                     </Button>
                 </CardActions>
