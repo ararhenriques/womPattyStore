@@ -1,4 +1,10 @@
 import ItemPic from '../assets/beefpic.png';
+import { ADD_TO_CART } from '../actions/actionTypes';
+import {REMOVE_FROM_CART } from '../actions/actionTypes';
+import { ADD_QUANTITY } from '../actions/actionTypes';
+import { SUB_QUANTITY } from '../actions/actionTypes';
+import { EMPTY_CART } from '../actions/actionTypes';
+import products from '../components/products';
 
 const initialState = {
     products: [{
@@ -27,60 +33,86 @@ const initialState = {
     }
 ],
     addedItems: [],
-    total: 0
+    total: 0,
+    // anchorEl: null,
+    // anchorReference: 'anchorEl',
   };
   const allReducer = (state = initialState, action) => {
-    // switch (action.type) {
-    //   case ADD_TO_CART:
-    //     return {
-    //       ...state,
-    //       products: state.products.map(product =>
-    //         product.id === action.id ? {...product, selected: true} : product,
-    //       ),
-    //     };
-    //   case REMOVE_FROM_CART:
-    //     return {
-    //       ...state,
-    //       products: state.products.map(product =>
-    //         product.id === action.id
-    //           ? {...product, selected: false, quantity: 1}
-    //           : product,
-    //       ),
-    //     };
-    //   case ADD_QUANTITY:
-    //     return {
-    //       ...state,
-    //       products: state.products.map(product =>
-    //         product.id === action.id
-    //           ? {...product, quantity: product.quantity + 1}
-    //           : product,
-    //       ),
-    //     };
-    //   case SUB_QUANTITY:
-    //     return {
-    //       ...state,
-    //       products: state.products.map(product =>
-    //         product.id === action.id
-    //           ? {
-    //               ...product,
-    //               quantity: product.quantity !== 1 ? product.quantity - 1 : 1,
-    //             }
-    //           : product,
-    //       ),
-    //     };
-    //   case EMPTY_CART:
-    //     return {
-    //       ...state,
-    //       products: state.products.map(product =>
-    //         product.selected
-    //           ? {...product, selected: false, quantity: 1}
-    //           : product,
-    //       ),
-    //     };
-    //   default:
-    //     return state;
-    // }
-    return state;
+    //switch (action.type) {
+      if(action.type === ADD_TO_CART){
+        let addedItem = state.products.find(products.id);
+        let existingItem = state.addedItems.find(products => action.id === products.id);
+        if(existingItem)
+         {
+            addedItem.quantity += 1 
+             return{
+                ...state,
+                 total: state.total + addedItem.price 
+                  }
+        }
+         else{
+            addedItem.quantity = 1;
+            //calculating the total
+            let newTotal = state.total + addedItem.price 
+            
+            return{
+                ...state,
+                addedItems: [...state.addedItems, addedItem],
+                total : newTotal
+            }
+          };
+        }
+       if(action.type === REMOVE_FROM_CART){
+        let itemToRemove= state.addedItems.find(products=> action.id === products.id)
+        let new_items = state.addedItems.filter(products=> action.id !== products.id)
+        let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
+
+        return{
+          ...state,
+          addedItems: new_items,
+          total: newTotal
+      };
+    }
+      if(action.type === ADD_QUANTITY){
+        let addedQItem = state.products.find(products=> products.id === action.id)
+        addedQItem.quantity += 1 
+          let newQTotal = state.total + addedQItem.price
+          return{
+              ...state,
+              total: newQTotal
+          };
+        }
+       if(action.type === SUB_QUANTITY){
+        let addedSItem = state.products.find(products=> products.id === action.id) 
+        if(addedSItem.quantity === 1){
+          let new_items = state.addedItems.filter(products=>products.id !== action.id)
+          let newSTotal = state.total - addedSItem.price
+          return{
+              ...state,
+              addedItems: new_items,
+              total: newSTotal
+          }
+      }
+      else {
+          addedSItem.quantity -= 1
+          let newS2Total = state.total - addedSItem.price
+          return{
+              ...state,
+              total: newS2Total
+          };
+        }
+      }
+      if(action.type === EMPTY_CART){
+        return {
+          ...state,
+          products: state.products.map(products =>
+            products.selected
+              ? {...products, selected: false, quantity: 1}
+              : products,
+          ),
+        };
+      }
+        return state;
   };
 
   export default allReducer;
