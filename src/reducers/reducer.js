@@ -32,7 +32,9 @@ const initialState = {
     }
 ],
     addedItems: [],
-    total: 0
+    total: 0,
+    // anchorEl: null,
+    // anchorReference: 'anchorEl',
   };
   const allReducer = (state = initialState, action) => {
     switch (action.type) {
