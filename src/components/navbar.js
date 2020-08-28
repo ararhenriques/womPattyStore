@@ -53,17 +53,17 @@ const useStyles = makeStyles((theme) => ({
     };
 
   let addedItems = state.products.length ?
-  (  
+  (
       state.products.map(products=>{
           return(
-             
+
               <li className="collection-item avatar" key={products.id}>
-                      
+
                           <div className="item-desc">
                               <span className="title">{products.name}</span>
-                              <p><b>Price: {products.price}$</b></p> 
+                              <p><b>Price: {products.price}$</b></p>
                               <p>
-                                  <b>Quantity: {products.quantity}</b> 
+                                  <b>Quantity: {products.quantity}</b>
                               </p>
                               <div className="add-remove">
                                 <IconButton >
@@ -77,8 +77,8 @@ const useStyles = makeStyles((theme) => ({
                                     <HighlightOffIcon />
                                 </IconButton>
                           </div>
-                          
-                     </li>                        
+
+                     </li>
           )
       })
   ):
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
 //           <ul className="collection">
 //               {addedItems}
 //           </ul>
-//       </div>  
+//       </div>
 //   </div>
 // )
 
@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
             // <nav className="nav-wrapper">
             //     <div className="container">
             //         <Link to="/" className="brand-logo">LOGO HERE</Link>
-                    
+
             //         <ul className="right">
             //             <li><Link to="/">Home</Link></li>
             //             <li><Link to="/products">Products</Link></li>
@@ -110,12 +110,12 @@ const useStyles = makeStyles((theme) => ({
             //             <li><ShoppingCartIcon to=""><i className="material-icons">ShoppingCartIcon</i></ShoppingCartIcon></li>
             //         </ul>
             //     </div>
-            // </nav>  
+            // </nav>
             <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            WOMPatties
+            WOM! Patties
           </Typography>
           <Typography variant="h6"><Link to="/" > Home </Link></Typography>
           <Typography variant="h6"><Link to="/products"> Products </Link></Typography>
@@ -142,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
             </div>
         </div>
       </Menu>
-      
+
     </div>
     )
 }

@@ -40,28 +40,28 @@ const initialState = {
   const allReducer = (state = initialState, action) => {
     //switch (action.type) {
       if(action.type === ADD_TO_CART){
-        let addedItem = state.products.find(products.id);
+        let addedItem = state.products.find(products => products.id === action.id);
         let existingItem = state.addedItems.find(products => action.id === products.id);
         if(existingItem)
          {
-            addedItem.quantity += 1 
+            addedItem.quantity += 1
              return{
                 ...state,
-                 total: state.total + addedItem.price 
+                 total: state.total + addedItem.price
                   }
         }
          else{
             addedItem.quantity = 1;
             //calculating the total
-            let newTotal = state.total + addedItem.price 
-            
+            let newTotal = state.total + addedItem.price
+
             return{
                 ...state,
                 addedItems: [...state.addedItems, addedItem],
                 total : newTotal
             }
           };
-        }
+      }
        if(action.type === REMOVE_FROM_CART){
         let itemToRemove= state.addedItems.find(products=> action.id === products.id)
         let new_items = state.addedItems.filter(products=> action.id !== products.id)
@@ -72,18 +72,20 @@ const initialState = {
           addedItems: new_items,
           total: newTotal
       };
-    }
+
+
+      }
       if(action.type === ADD_QUANTITY){
         let addedQItem = state.products.find(products=> products.id === action.id)
-        addedQItem.quantity += 1 
+        addedQItem.quantity += 1
           let newQTotal = state.total + addedQItem.price
           return{
               ...state,
               total: newQTotal
           };
-        }
+      }
        if(action.type === SUB_QUANTITY){
-        let addedSItem = state.products.find(products=> products.id === action.id) 
+        let addedSItem = state.products.find(products=> products.id === action.id)
         if(addedSItem.quantity === 1){
           let new_items = state.addedItems.filter(products=>products.id !== action.id)
           let newSTotal = state.total - addedSItem.price
