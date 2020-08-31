@@ -55,9 +55,6 @@ const useStyles = makeStyles((theme) => ({
           };
 
     useEffect(() => {
-
-      mapDispatchToProps();
-      mapStateToProps();
       handleAddQuantity();
       handleClick();
       handleClose();
