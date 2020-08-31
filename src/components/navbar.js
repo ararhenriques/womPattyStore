@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -27,30 +27,45 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
- const Navbar = (state) =>{
+ function Navbar(state){
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    const [] = useState();
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+           const handleClick = (event) => {
+            setAnchorEl(event.currentTarget);
+          };
+      
+          const handleClose = () => {
+            setAnchorEl(null);
+          };
+      
+          const handleRemove = (id) =>{
+            state.removeFromCart(id)
+          };
+      
+          const handleSubQuantity = (id) =>{
+          state.subQuantity(id)
+          };
+      
+          const handleAddQuantity = (id) =>{
+          state.addQuantity(id)
+          };
 
-  const handleRemove = (id) =>{
-      state.removeFromCart(id)
-  };
+    useEffect(() => {
 
-  const handleSubQuantity = (id) =>{
-    state.subQuantity(id)
-    };
+      mapDispatchToProps();
+      mapStateToProps();
+      handleAddQuantity();
+      handleClick();
+      handleClose();
+      handleRemove();
+      handleSubQuantity();
+      
 
-   const handleAddQuantity = (id) =>{
-    state.addQuantity(id)
-    };
+    }, []);
 
   let addedItems = state.products.length ?
   (
@@ -67,13 +82,13 @@ const useStyles = makeStyles((theme) => ({
                               </p>
                               <div className="add-remove">
                                 <IconButton >
-                                    <ArrowDropUpIcon onClick={()=>{this.handleAddQuantity(products.id)}} />
+                                    <ArrowDropUpIcon onClick={() => {handleAddQuantity(products.id)}} />
                                 </IconButton>
-                                <IconButton onClick={()=>{this.handleSubtractQuantity(products.id)}}>
+                                <IconButton onClick={() => {handleSubQuantity(products.id)}}>
                                     <ArrowDropDownIcon />
                                 </IconButton>
                               </div>
-                                <IconButton onClick={()=>{this.handleRemove(products.id)}}>
+                                <IconButton onClick={() => {handleRemove(products.id)}}>
                                     <HighlightOffIcon />
                                 </IconButton>
                           </div>
@@ -120,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
           <Typography variant="h6"><Link to="/" > Home </Link></Typography>
           <Typography variant="h6"><Link to="/products"> Products </Link></Typography>
           <Typography variant="h6"><Link to="/contact"> Contact </Link></Typography>
-          <IconButton onClick={handleClick} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton onClick={() => {handleClick()}} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <ShoppingCartIcon />
           </IconButton>
         </Toolbar>
@@ -131,7 +146,7 @@ const useStyles = makeStyles((theme) => ({
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={() => {handleClose()}}
       >
         <div>
             <div>

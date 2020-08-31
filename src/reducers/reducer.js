@@ -76,31 +76,31 @@ const initialState = {
 
       }
       if(action.type === ADD_QUANTITY){
-        let addedQItem = state.products.find(products=> products.id === action.id)
-        addedQItem.quantity += 1
-          let newQTotal = state.total + addedQItem.price
+        let addedItem = state.products.find(products=> products.id === action.id)
+        addedItem.quantity += 1
+          let newTotal = state.total + addedItem.price
           return{
               ...state,
-              total: newQTotal
+              total: newTotal
           };
       }
        if(action.type === SUB_QUANTITY){
-        let addedSItem = state.products.find(products=> products.id === action.id)
-        if(addedSItem.quantity === 1){
+        let addedItem = state.products.find(products=> products.id === action.id)
+        if(addedItem.quantity === 1){
           let new_items = state.addedItems.filter(products=>products.id !== action.id)
-          let newSTotal = state.total - addedSItem.price
+          let newTotal = state.total - addedItem.price
           return{
               ...state,
               addedItems: new_items,
-              total: newSTotal
+              total: newTotal
           }
       }
       else {
-          addedSItem.quantity -= 1
-          let newS2Total = state.total - addedSItem.price
+          addedItem.quantity -= 1
+          let newTotal = state.total - addedItem.price
           return{
               ...state,
-              total: newS2Total
+              total: newTotal
           };
         }
       }
