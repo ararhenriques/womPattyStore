@@ -62,7 +62,7 @@ const initialState = {
             }
           };
       }
-       if(action.type === REMOVE_FROM_CART){
+      if(action.type === REMOVE_FROM_CART){
         let itemToRemove= state.addedItems.find(products=> action.id === products.id)
         let new_items = state.addedItems.filter(products=> action.id !== products.id)
         let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
@@ -84,7 +84,7 @@ const initialState = {
               total: newQTotal
           };
       }
-       if(action.type === SUB_QUANTITY){
+      if(action.type === SUB_QUANTITY){
         let addedSItem = state.products.find(products=> products.id === action.id)
         if(addedSItem.quantity === 1){
           let new_items = state.addedItems.filter(products=>products.id !== action.id)
