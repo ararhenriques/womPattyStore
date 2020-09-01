@@ -67,13 +67,13 @@ const useStyles = makeStyles((theme) => ({
                               </p>
                               <div className="add-remove">
                                 <IconButton >
-                                    <ArrowDropUpIcon onClick={()=>{this.handleAddQuantity(products.id)}} />
+                                    <ArrowDropUpIcon onClick={()=>{handleAddQuantity(products.id)}} />
                                 </IconButton>
-                                <IconButton onClick={()=>{this.handleSubtractQuantity(products.id)}}>
+                                <IconButton onClick={()=>{handleSubQuantity(products.id)}}>
                                     <ArrowDropDownIcon />
                                 </IconButton>
                               </div>
-                                <IconButton onClick={()=>{this.handleRemove(products.id)}}>
+                                <IconButton onClick={()=>{handleRemove(products.id)}}>
                                     <HighlightOffIcon />
                                 </IconButton>
                           </div>
