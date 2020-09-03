@@ -37,19 +37,19 @@ const styles = theme => ({
   handleClick = (event) => {
     this.setState({anchorEl: event.currentTarget});
   };
-      
+
   handleClose = () => {
     this.setState({anchorEl: null});
   };
-    
+
   handleRemove = (id) =>{
     this.props.removeFromCart(id)
   };
-      
+
   handleSubQuantity = (id) =>{
     this.props.subQuantity(id)
   };
-      
+
   handleAddQuantity = (id) =>{
     this.props.addQuantity(id)
   };
@@ -128,12 +128,12 @@ const styles = theme => ({
           <Typography variant="h6"><Link to="/" > Home </Link></Typography>
           <Typography variant="h6"><Link to="/products"> Products </Link></Typography>
           <Typography variant="h6"><Link to="/contact"> Contact </Link></Typography>
-          <IconButton onClick={() => {this.handleClick()}} 
-            edge="start" 
-            className={classes.menuButton} 
-            color="inherit" 
-            aria-haspopup="true" 
-            aria-owns= {anchorEl ? "simple-menu": null} 
+          <IconButton onClick={() => {this.handleClick()}}
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-haspopup="true"
+            aria-owns= {anchorEl ? "simple-menu": null}
             aria-label="menu">
             <ShoppingCartIcon />
           </IconButton>
@@ -144,6 +144,7 @@ const styles = theme => ({
         id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
+        getContentAnchorEl={null}
         open={Boolean(anchorEl)}
         onClose={()=>{this.handleClose()}}
       >
@@ -164,7 +165,7 @@ const styles = theme => ({
 
 const mapStateToProps = (state) => {
     return {
-        products: state.addedItems, 
+        products: state.addedItems,
         anchorEl: state.anchorEl
     }
 }
