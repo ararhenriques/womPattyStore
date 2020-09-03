@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import {removeFromCart, subQuantity, addQuantity} from '../actions/actions';
+import {removeFromCart, subQuantity, addQuantity, toggleMenu} from '../actions/actions';
 
 const styles = theme => ({
     root: {
@@ -31,10 +31,8 @@ const styles = theme => ({
 
   // classes = useStyles();
 
-  handleClick = () => {
-    store.dispatch({
-      type: 'TOGGLE_MENU'
-    })
+  handleClick = (event) => {
+    this.props.toggleMenu(event)
   };
       
   handleClose = () => {
@@ -172,7 +170,8 @@ const mapDispatchToProps = (dispatch) => {
     return{
         removeFromCart: (id)=> {dispatch(removeFromCart(id))},
         addQuantity: (id)=> {dispatch(addQuantity(id))},
-        subQuantity: (id)=> {dispatch(subQuantity(id))}
+        subQuantity: (id)=> {dispatch(subQuantity(id))},
+        toggleMenu: (event)=> {dispatch(toggleMenu(event))}
     }
 }
 

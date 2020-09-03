@@ -30,9 +30,9 @@ export const emptyCart = (id) => {
         id
     };
 };
-export const toggleMenu = (id) => {
+export const toggleMenu = (event) => {
     return {
         type: TOGGLE_MENU,
-        id
+        event
     };
 };
