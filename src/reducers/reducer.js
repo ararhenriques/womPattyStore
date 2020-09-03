@@ -4,6 +4,7 @@ import {REMOVE_FROM_CART } from '../actions/actionTypes';
 import { ADD_QUANTITY } from '../actions/actionTypes';
 import { SUB_QUANTITY } from '../actions/actionTypes';
 import { EMPTY_CART } from '../actions/actionTypes';
+import { TOGGLE_MENU } from '../actions/actionTypes';
 import products from '../components/products';
 
 const initialState = {
@@ -34,8 +35,8 @@ const initialState = {
 ],
     addedItems: [],
     total: 0,
-    //anchorEl: null,
-    //anchorReference: 'anchorEl',
+    anchorEl: null,
+    anchorReference: 'anchorEl',
     searchNodes: ""
   };
   const allReducer = (state = initialState, action) => {
@@ -114,6 +115,14 @@ const initialState = {
               : products,
           ),
         };
+      }
+      if(action.type === TOGGLE_MENU){
+        let anchor = state.anchorEl
+        let anchorToggle = !anchor
+        return {
+          ...state,
+            anchorEl: anchorToggle
+        }
       }
         return state;
   };

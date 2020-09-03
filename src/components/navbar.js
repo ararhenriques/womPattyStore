@@ -28,14 +28,13 @@ const styles = theme => ({
   });
 
  class Navbar extends Component{
-   state = {
-     anchorEl: null
-   };
 
   // classes = useStyles();
 
-  handleClick = (event) => {
-    this.setState({anchorEl: event.currentTarget});
+  handleClick = () => {
+    store.dispatch({
+      type: 'TOGGLE_MENU'
+    })
   };
       
   handleClose = () => {
@@ -169,7 +168,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
     return{
         removeFromCart: (id)=> {dispatch(removeFromCart(id))},
         addQuantity: (id)=> {dispatch(addQuantity(id))},
