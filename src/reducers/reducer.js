@@ -4,6 +4,7 @@ import {REMOVE_FROM_CART } from '../actions/actionTypes';
 import { ADD_QUANTITY } from '../actions/actionTypes';
 import { SUB_QUANTITY } from '../actions/actionTypes';
 import { EMPTY_CART } from '../actions/actionTypes';
+import { TOGGLE_MENU } from '../actions/actionTypes';
 import products from '../components/products';
 
 const initialState = {
@@ -34,8 +35,9 @@ const initialState = {
 ],
     addedItems: [],
     total: 0,
-    // anchorEl: null,
-    // anchorReference: 'anchorEl',
+    anchorEl: null,
+    anchorReference: 'anchorEl',
+    searchNodes: ""
   };
   const allReducer = (state = initialState, action) => {
     //switch (action.type) {
@@ -62,7 +64,7 @@ const initialState = {
             }
           };
       }
-       if(action.type === REMOVE_FROM_CART){
+      if(action.type === REMOVE_FROM_CART){
         let itemToRemove= state.addedItems.find(products=> action.id === products.id)
         let new_items = state.addedItems.filter(products=> action.id !== products.id)
         let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
@@ -78,29 +80,29 @@ const initialState = {
       if(action.type === ADD_QUANTITY){
         let addedQItem = state.products.find(products=> products.id === action.id)
         addedQItem.quantity += 1
-          let newQTotal = state.total + addedQItem.price
+          let newTotal = state.total + addedQItem.price
           return{
               ...state,
-              total: newQTotal
+              total: newTotal
           };
       }
-       if(action.type === SUB_QUANTITY){
+      if(action.type === SUB_QUANTITY){
         let addedSItem = state.products.find(products=> products.id === action.id)
         if(addedSItem.quantity === 1){
           let new_items = state.addedItems.filter(products=>products.id !== action.id)
-          let newSTotal = state.total - addedSItem.price
+          let newTotal = state.total - addedSItem.price
           return{
               ...state,
               addedItems: new_items,
-              total: newSTotal
+              total: newTotal
           }
       }
       else {
           addedSItem.quantity -= 1
-          let newS2Total = state.total - addedSItem.price
+          let newTotal = state.total - addedSItem.price
           return{
               ...state,
-              total: newS2Total
+              total: newTotal
           };
         }
       }
@@ -113,6 +115,14 @@ const initialState = {
               : products,
           ),
         };
+      }
+      if(action.type === TOGGLE_MENU){
+        let anchor = state.anchorEl
+        let anchorToggle = !anchor
+        return {
+          ...state,
+            anchorEl: anchorToggle
+        }
       }
         return state;
   };

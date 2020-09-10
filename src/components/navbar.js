@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
+import Menu from './menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import {removeFromCart, subQuantity, addQuantity} from '../actions/actions';
+import {removeFromCart, subQuantity, addQuantity, toggleMenu} from '../actions/actions';
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
     root: {
       flexGrow: 1,
     },
@@ -25,36 +25,41 @@ const useStyles = makeStyles((theme) => ({
     title: {
       flexGrow: 1,
     },
-  }));
+  });
 
- const Navbar = (state) =>{
-    const classes = useStyles();
+ class Navbar extends Component{
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+  // classes = useStyles();
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  handleClick = (event) => {
+    this.props.toggleMenu(event)
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  handleClose = () => {
+    this.setState({anchorEl: null});
   };
 
-  const handleRemove = (id) =>{
-      state.removeFromCart(id)
+  handleRemove = (id) =>{
+    this.props.removeFromCart(id)
   };
 
-  const handleSubQuantity = (id) =>{
-    state.subQuantity(id)
-    };
+  handleSubQuantity = (id) =>{
+    this.props.subQuantity(id)
+  };
 
-   const handleAddQuantity = (id) =>{
-    state.addQuantity(id)
-    };
+  handleAddQuantity = (id) =>{
+    this.props.addQuantity(id)
+  };
 
-  let addedItems = state.products.length ?
+  render(){
+
+    const { classes } = this.props;
+
+    const { anchorEl } = this.setState;
+
+    let addedItems = this.props.products.length ?
   (
-      state.products.map(products=>{
+      this.props.products.map(products=>{
           return(
 
               <li className="collection-item avatar" key={products.id}>
@@ -67,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
                               </p>
                               <div className="add-remove">
                                 <IconButton >
+<<<<<<< HEAD
                                     <ArrowDropUpIcon onClick={()=>{handleAddQuantity(products.id)}} />
                                 </IconButton>
                                 <IconButton onClick={()=>{handleSubQuantity(products.id)}}>
@@ -74,6 +80,15 @@ const useStyles = makeStyles((theme) => ({
                                 </IconButton>
                               </div>
                                 <IconButton onClick={()=>{handleRemove(products.id)}}>
+=======
+                                    <ArrowDropUpIcon onClick={() => {this.handleAddQuantity(products.id)}} />
+                                </IconButton>
+                                <IconButton onClick={() => {this.handleSubQuantity(products.id)}}>
+                                    <ArrowDropDownIcon />
+                                </IconButton>
+                              </div>
+                                <IconButton onClick={() => {this.handleRemove(products.id)}}>
+>>>>>>> menu
                                     <HighlightOffIcon />
                                 </IconButton>
                           </div>
@@ -120,7 +135,13 @@ const useStyles = makeStyles((theme) => ({
           <Typography variant="h6"><Link to="/" > Home </Link></Typography>
           <Typography variant="h6"><Link to="/products"> Products </Link></Typography>
           <Typography variant="h6"><Link to="/contact"> Contact </Link></Typography>
-          <IconButton onClick={handleClick} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton onClick={() => {this.handleClick()}}
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-haspopup="true"
+            aria-owns= {anchorEl ? "simple-menu": null}
+            aria-label="menu">
             <ShoppingCartIcon />
           </IconButton>
         </Toolbar>
@@ -131,7 +152,7 @@ const useStyles = makeStyles((theme) => ({
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={()=>{this.handleClose()}}
       >
         <div>
             <div>
@@ -145,20 +166,23 @@ const useStyles = makeStyles((theme) => ({
 
     </div>
     )
+  }
 }
 
 const mapStateToProps = (state) => {
     return {
-        products: state.addedItems
+        products: state.addedItems,
+        anchorEl: state.anchorEl
     }
 }
 
-const mapDispatchToProps = (dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
     return{
-        removeFromCart: (id)=>{dispatch(removeFromCart(id))},
-        addQuantity: (id)=>{dispatch(addQuantity(id))},
-        subQuantity: (id)=>{dispatch(subQuantity(id))}
+        removeFromCart: (id)=> {dispatch(removeFromCart(id))},
+        addQuantity: (id)=> {dispatch(addQuantity(id))},
+        subQuantity: (id)=> {dispatch(subQuantity(id))},
+        toggleMenu: (event)=> {dispatch(toggleMenu(event))}
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Navbar));
