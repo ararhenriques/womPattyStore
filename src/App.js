@@ -9,6 +9,7 @@ import Navbar from "./components/navbar";
 import Products from "./components/products";
 import Contact from "./components/contact";
 import Home from "./components/home";
+import Cart from "./components/cart";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route exact path="/products" component={Products}/>
+              <Route exact path="/cart" component={Cart}/>
               <Route exact path="/contact" component={Contact}/>
             </Switch>
         </div>
