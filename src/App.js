@@ -12,6 +12,8 @@ import Home from "./components/home";
 import Cart from "./components/cart";
 import { withStyles } from '@material-ui/core/styles';
 import bgImage from './assets/wpsHome.JPG';
+import bgImage1 from './assets/wpsContact.JPG';
+import bgImage2 from './assets/wpsProducts.JPG';
 
 
 const styles = theme => ({
@@ -43,9 +45,10 @@ const styles = theme => ({
 });
 
 class App extends Component {
+
   
   render() {
-
+//  <div style={{backgroundImage: `url(require(${bgImage1}))`}}></div>
     const { classes } = this.props;
 
     return(
