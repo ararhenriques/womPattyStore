@@ -80,9 +80,11 @@ const initialState = {
         let addedQItem = state.products.find(products=> products.id === action.id)
         addedQItem.quantity += 1
           let newTotal = state.total + addedQItem.price
+          let newItems = [...state.products]
           return{
               ...state,
-              total: newTotal
+              total: newTotal,
+              addedItems: newItems
           };
       }
       if(action.type === SUB_QUANTITY){

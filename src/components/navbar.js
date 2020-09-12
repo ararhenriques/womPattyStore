@@ -19,6 +19,9 @@ const styles = theme => ({
     root: {
       flexGrow: 1,
     },
+    navBar: {
+      backgroundColor: '#DD00AE'
+    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -39,7 +42,7 @@ const styles = theme => ({
     return(
 
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.navBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             WOM! Patties
