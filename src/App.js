@@ -15,13 +15,13 @@ import bgImage from './assets/wpsHome.JPG';
 
 
 const styles = theme => ({
-  "#global": {
+  "@global": {
     body: {
-      height: '100%',
+      height: '100vh',
       backgroundPosition: 'center center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
-      backgroundImage: "url('/assets/wpsHome.JPG')",
+      backgroundImage: `url(${bgImage})`,
       backgroundAttachment: "fixed",
       
     }
@@ -52,7 +52,6 @@ class App extends Component {
       <Router>
         <div className="root">
           <div className="app">
-            <image className={classes.img}></image>
             <Navbar />
             <Switch>
               <Route exact path="/" component={Home}/>
