@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {removeFromCart, subQuantity, addQuantity} from '../actions/actions';
+import products from './products';
 
 const styles = theme => ({
     root: {
@@ -50,7 +51,7 @@ const styles = theme => ({
           <Typography variant="h6"><Link to="/" > Home </Link></Typography>
           <Typography variant="h6"><Link to="/products"> Products </Link></Typography>
           <Typography variant="h6"><Link to="/cart"> Cart </Link></Typography>
-          <Typography variant="h6"><Link to="/contact"> Contact </Link></Typography>
+          <Typography variant="h6"><Link to="/contact" > Contact </Link></Typography>
         </Toolbar>
       </AppBar>
 

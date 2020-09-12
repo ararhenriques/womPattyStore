@@ -6,10 +6,15 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import IconButton from '@material-ui/core/IconButton';
 import { removeFromCart, addQuantity, subQuantity} from '../actions/actions';
-import products from './products';
+import bgImage from '../assets/wpsHome.JPG';
+import bgImage1 from '../assets/wpsContact.JPG';
+import bgImage2 from '../assets/wpsProducts.JPG';
 
 class Cart extends Component{
 
+    componentDidMount(){
+        document.body.style.backgroundImage = `url(require(${bgImage1}))`
+    }
     
     handleRemove = (id)=>{
         this.props.removeFromCart(id);

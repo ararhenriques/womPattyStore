@@ -56,7 +56,7 @@ class App extends Component {
         <div className="root">
           <div className="app">
             <Navbar />
-            <Switch>
+            <Switch >
               <Route exact path="/" component={Home}/>
               <Route exact path="/products" component={Products}/>
               <Route exact path="/cart" component={Cart}/>
