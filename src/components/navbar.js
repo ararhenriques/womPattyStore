@@ -14,6 +14,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {removeFromCart, subQuantity, addQuantity} from '../actions/actions';
+import { TableBody } from '@material-ui/core';
+import bgImage from '../assets/wpsHome.JPG';
+import bgImage1 from '../assets/wpsContact.JPG';
+import bgImage2 from '../assets/wpsProducts.JPG';
 
 const styles = theme => ({
     root: {
@@ -35,8 +39,21 @@ const styles = theme => ({
      anchorEl: null
    };
 
-  render(){
+   handleClick =(str) => {
+     var bckgrndImage = document.body.style.backgroundImage
+     if (str === "Home"){
+       this.bckgrndImage = `url(require(${bgImage}))`
+     } else if (str === "Contacts") {
+       bckgrndImage = `url(require(${bgImage1}))`
+     } else if (str === "Products") {
+       bckgrndImage = `url(require(${bgImage2}))`
+     } else {
+       bckgrndImage = `url(require(${bgImage}))`
+     };
+     console.log(`${str} clicked`)
+   };
 
+  render(){
     const { classes } = this.props;
 
     return(
@@ -44,13 +61,13 @@ const styles = theme => ({
     <div className={classes.root}>
       <AppBar position="static" className={classes.navBar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} onClick={this.handleClick("Home")}>
             WOM! Patties
           </Typography>
-          <Typography variant="h6"><Link to="/" > Home </Link></Typography>
-          <Typography variant="h6"><Link to="/products"> Products </Link></Typography>
-          <Typography variant="h6"><Link to="/cart"> Cart </Link></Typography>
-          <Typography variant="h6"><Link to="/contact"> Contact </Link></Typography>
+          <Typography variant="h6" onClick={this.handleClick("Home")}><Link to="/" > Home </Link></Typography>
+          <Typography variant="h6" onClick={this.handleClick("Products")}><Link to="/products"> Products </Link></Typography>
+          <Typography variant="h6" onClick={this.handleClick("Cart")}><Link to="/cart"> Cart </Link></Typography>
+          <Typography variant="h6" onClick={this.handleClick("Contact")}><Link to="/contact"> Contact </Link></Typography>
         </Toolbar>
       </AppBar>
 

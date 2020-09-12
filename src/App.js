@@ -25,7 +25,7 @@ const styles = theme => ({
       backgroundSize: 'cover',
       backgroundImage: `url(${bgImage})`,
       backgroundAttachment: "fixed",
-      
+
     }
   },
   root: {
@@ -41,12 +41,12 @@ const styles = theme => ({
   app: {
     display: 'block'
   },
-  
+
 });
 
 class App extends Component {
 
-  
+
   render() {
 //  <div style={{backgroundImage: `url(require(${bgImage1}))`}}></div>
     const { classes } = this.props;
