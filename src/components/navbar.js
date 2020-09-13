@@ -14,7 +14,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {removeFromCart, subQuantity, addQuantity} from '../actions/actions';
-import products from './products';
+import { TableBody } from '@material-ui/core';
+import bgImage from '../assets/wpsHome.JPG';
+import bgImage1 from '../assets/wpsContact.JPG';
+import bgImage2 from '../assets/wpsProducts.JPG';
 
 const styles = theme => ({
     root: {
@@ -48,10 +51,10 @@ const styles = theme => ({
           <Typography variant="h6" className={classes.title}>
             WOM! Patties
           </Typography>
-          <Typography variant="h6"><Link to="/" > Home </Link></Typography>
-          <Typography variant="h6"><Link to="/products"> Products </Link></Typography>
-          <Typography variant="h6"><Link to="/cart"> Cart </Link></Typography>
-          <Typography variant="h6"><Link to="/contact" > Contact </Link></Typography>
+          <Typography variant="h6" ><Link to="/" > Home </Link></Typography>
+          <Typography variant="h6" ><Link to="/products"> Products </Link></Typography>
+          <Typography variant="h6" ><Link to="/cart"> Cart </Link></Typography>
+          <Typography variant="h6" ><Link to="/contact"> Contact </Link></Typography>
         </Toolbar>
       </AppBar>
 

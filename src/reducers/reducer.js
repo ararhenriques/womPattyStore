@@ -4,7 +4,6 @@ import {REMOVE_FROM_CART } from '../actions/actionTypes';
 import { ADD_QUANTITY } from '../actions/actionTypes';
 import { SUB_QUANTITY } from '../actions/actionTypes';
 import { EMPTY_CART } from '../actions/actionTypes';
-import products from '../components/products';
 
 const initialState = {
     products: [{
@@ -12,7 +11,7 @@ const initialState = {
         "name": "Beef Patty",
         "image": ItemPic,
         "price": 12,
-        "quantity": 1,
+        "quantity": 0,
         "selected": false
     },
     {
@@ -20,26 +19,23 @@ const initialState = {
         "name": "Chicken Patty",
         "image": ItemPic,
         "price": 12,
-        "quantity": 1,
+        "quantity": 0,
         "selected": false
     },
     {
         "id": 3,
-        "name": "Chicken and Cheese Patty",
+        "name": "Chicken & Cheese Patty",
         "image": ItemPic,
         "price": 14,
-        "quantity": 1,
+        "quantity": 0,
         "selected": false
     }
 ],
     addedItems: [],
     total: 0,
-    //anchorEl: null,
-    //anchorReference: 'anchorEl',
     searchNodes: ""
   };
   const allReducer = (state = initialState, action) => {
-    //switch (action.type) {
       if(action.type === ADD_TO_CART){
         let addedItem = state.products.find(products => products.id === action.id);
         let existingItem = state.addedItems.find(products => action.id === products.id);
@@ -53,7 +49,6 @@ const initialState = {
         }
          else{
             addedItem.quantity = 1;
-            //calculating the total
             let newTotal = state.total + addedItem.price
 
             return{
@@ -103,7 +98,8 @@ const initialState = {
           let newTotal = state.total - addedSItem.price
           return{
               ...state,
-              total: newTotal
+              total: newTotal,
+               quantity: addedSItem.quantity
           };
         }
       }

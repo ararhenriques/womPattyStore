@@ -10,7 +10,65 @@ import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
-import { addToCart } from '../actions/actions'
+import { addToCart } from '../actions/actions';
+import { withStyles } from '@material-ui/core';
+import bgImage from '../assets/wpsHome.JPG';
+import bgImage1 from '../assets/wpsContact.JPG';
+import bgImage2 from '../assets/wpsProducts.JPG';
+
+const styles = theme => ({
+    "@global": {
+        body: {
+          height: '100vh',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundImage: `url(${bgImage1})`,
+          backgroundAttachment: "fixed"
+        }
+        
+      },
+
+      cardImg: {
+          maxHeight: 140,
+          margin: 'auto'
+      },
+
+      card: {
+        width: 345,
+        minWidth: 300,
+        height: 300,
+        backgroundColor: '#122F54',
+        boxShadow: 3,
+        margin: 'auto',
+        marginTop: "50px",
+        marginBottom: "50px",
+        display: 'flex',
+        flexDirection: 'row',
+        zIndex: 2
+      },
+
+      cardFill: {
+        display: 'flex',
+        flexDirection: 'column',
+        verticalAlign: 'middle',
+        textAlign: 'center',
+        color: '#8BD6AE'
+      },
+
+      box: {
+        display: 'flex',
+        flexDirection: 'column',
+
+      },
+
+      button: {
+        color: '#8BD6AE',
+        backgroundColor: '#181C3F',
+        height: '100%'
+      }
+
+});
 
 
 class Products extends Component{
@@ -20,26 +78,30 @@ class Products extends Component{
     }
 
     render() {
+        
+        const { classes } = this.props;
+
         let itemList = this.props.products.map(products =>{
+
         return(
-            <Card key={products.id} //maxwidth 345
+            <Card key={products.id} className={classes.card}
             >
-                <CardActionArea>
-                    <img //height 140
-                    src={products.image} //src?
+                <CardActionArea className={classes.cardFill}>
+                    <img
+                    src={products.image}
                     alt={products.name}
-                    />
+                    className={classes.cardImg}/>
                     <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         {products.name}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="body2" component="p">
                         Price: ${products.price}
                     </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary" onClick={this.handleClick(products.id)}>
+                    <Button size="meduim" className={classes.button} onClick={this.handleClick(products.id)}>
                     Add to cart
                     </Button>
                 </CardActions>
@@ -52,7 +114,7 @@ class Products extends Component{
             <CssBaseline />
             <Container //maxWidth="sm"
             >
-                <Box>
+                <Box className={classes.box}>
                 {itemList}
                 </Box>
             </Container>
@@ -74,4 +136,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Products));

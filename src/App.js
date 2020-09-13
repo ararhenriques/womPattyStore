@@ -17,17 +17,7 @@ import bgImage2 from './assets/wpsProducts.JPG';
 
 
 const styles = theme => ({
-  "@global": {
-    body: {
-      height: '100vh',
-      backgroundPosition: 'center center',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
-      backgroundImage: `url(${bgImage})`,
-      backgroundAttachment: "fixed",
-      
-    }
-  },
+  
   root: {
     flexGrow: 1,
     display: 'block'
@@ -40,13 +30,14 @@ const styles = theme => ({
   },
   app: {
     display: 'block'
+
   },
-  
+
 });
 
 class App extends Component {
 
-  
+
   render() {
 //  <div style={{backgroundImage: `url(require(${bgImage1}))`}}></div>
     const { classes } = this.props;
