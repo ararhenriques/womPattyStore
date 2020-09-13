@@ -37,8 +37,10 @@ const initialState = {
   };
   const allReducer = (state = initialState, action) => {
       if(action.type === ADD_TO_CART){
-        let addedItem = state.products.find(products => products.id === action.id);
-        let existingItem = state.addedItems.find(products => action.id === products.id);
+        let addedItem = state.products.find(product => product.id === action.id);
+        let existingItem = state.addedItems.find(product => action.id === product.id);
+        console.log(addedItem);
+        console.log(action.id);
         if(existingItem)
          {
             addedItem.quantity += 1
@@ -113,7 +115,9 @@ const initialState = {
           ),
         };
       }
+      else {
         return state;
+    }
   };
 
   export default allReducer;
