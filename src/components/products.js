@@ -26,7 +26,7 @@ const styles = theme => ({
           backgroundImage: `url(${bgImage1})`,
           backgroundAttachment: "fixed"
         }
-        
+
       },
 
       cardImg: {
@@ -74,11 +74,12 @@ const styles = theme => ({
 class Products extends Component{
 
     handleClick = (id) => {
+        console.log(id)
         this.props.addToCart(id);
     }
 
     render() {
-        
+
         const { classes } = this.props;
 
         let itemList = this.props.products.map(products =>{
@@ -101,7 +102,7 @@ class Products extends Component{
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="meduim" className={classes.button} onClick={this.handleClick(products.id)}>
+                    <Button size="meduim" className={classes.button} onClick={() => this.handleClick(products.id)}>
                     Add to cart
                     </Button>
                 </CardActions>
