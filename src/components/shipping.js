@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core';
+import { CardActions, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 //import { addShipping } from './actions/cartActions'
 
@@ -14,11 +14,13 @@ const styles = theme => ({
 
     buttonBox: {
         display: 'flex',
-        height: '100%'
+        height: '100%',
+        margin: 'auto'
     },
 
     card: {
-        maxWidth: 200,
+        minWidth: 200,
+        maxWidth: 250,
         backgroundColor: '#122F54',
         boxShadow: 3,
         margin: 'auto',
@@ -74,9 +76,9 @@ class Shipping extends Component{
                         </li>
                         <li className={classes.list}><b>Total: {this.props.total} $</b></li>
                     </div>
-                    <div >
+                    <CardActions>
                         <Button className={classes.button}>Checkout</Button>
-                    </div>
+                    </CardActions>
                  </div>
         )
     }

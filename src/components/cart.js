@@ -29,7 +29,7 @@ const styles = theme => ({
     },
 
     card: {
-      width: 345,
+      width: '25%',
       minWidth: 300,
       minHeight: 300,
       backgroundColor: '#122F54',
