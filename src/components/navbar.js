@@ -18,10 +18,16 @@ import { TableBody } from '@material-ui/core';
 import bgImage from '../assets/wpsHome.JPG';
 import bgImage1 from '../assets/wpsContact.JPG';
 import bgImage2 from '../assets/wpsProducts.JPG';
+import logo from '../assets/wompattyLogo.png'
 
 const styles = theme => ({
     root: {
       flexGrow: 1,
+    },
+    navLink: {
+      textDecoration: 'none',
+      margin: '5px',
+      color: '#122F54'
     },
     navBar: {
       backgroundColor: '#DD00AE'
@@ -31,7 +37,12 @@ const styles = theme => ({
     },
     title: {
       flexGrow: 1,
+      color: '#122F54'
     },
+    navImg: {
+      height: "7%",
+      width: "7%"
+    }
   });
 
  class Navbar extends Component{
@@ -48,13 +59,16 @@ const styles = theme => ({
     <div className={classes.root}>
       <AppBar position="static" className={classes.navBar}>
         <Toolbar>
+        <img 
+        src={logo}
+        className={classes.navImg}/>
           <Typography variant="h6" className={classes.title}>
             WOM! Patties
           </Typography>
-          <Typography variant="h6" ><Link to="/" > Home </Link></Typography>
-          <Typography variant="h6" ><Link to="/products"> Products </Link></Typography>
-          <Typography variant="h6" ><Link to="/cart"> Cart </Link></Typography>
-          <Typography variant="h6" ><Link to="/contact"> Contact </Link></Typography>
+          <Typography variant="h6" ><Link to="/" className={classes.navLink}> Home </Link></Typography><br />
+          <Typography variant="h6" ><Link to="/products" className={classes.navLink}> Products </Link></Typography><br />
+          <Typography variant="h6" ><Link to="/cart" className={classes.navLink}> Cart </Link></Typography><br />
+          <Typography variant="h6" ><Link to="/contact" className={classes.navLink}> Contact </Link></Typography><br />
         </Toolbar>
       </AppBar>
 

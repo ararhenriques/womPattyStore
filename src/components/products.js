@@ -102,7 +102,7 @@ class Products extends Component{
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="meduim" className={classes.button} onClick={() => this.handleClick(products.id)}>
+                    <Button size="medium" className={classes.button} onClick={() => this.handleClick(products.id)}>
                     Add to cart
                     </Button>
                 </CardActions>

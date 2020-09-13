@@ -4,6 +4,8 @@ import {REMOVE_FROM_CART } from '../actions/actionTypes';
 import { ADD_QUANTITY } from '../actions/actionTypes';
 import { SUB_QUANTITY } from '../actions/actionTypes';
 import { EMPTY_CART } from '../actions/actionTypes';
+import { ADD_SHIPPING } from '../actions/actionTypes';
+
 
 const initialState = {
     products: [{
@@ -115,6 +117,21 @@ const initialState = {
           ),
         };
       }
+
+      if(action.type=== ADD_SHIPPING){
+        return{
+            ...state,
+            total: state.total + 4
+        }
+      }
+
+      if(action.type=== 'SUB_SHIPPING'){
+          return{
+              ...state,
+              total: state.total - 4
+          }
+      }
+
       else {
         return state;
     }

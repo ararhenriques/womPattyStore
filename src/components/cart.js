@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Shipping from './shipping';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import IconButton from '@material-ui/core/IconButton';
 import { removeFromCart, addQuantity, subQuantity} from '../actions/actions';
 import bgImage from '../assets/wpsHome.JPG';
-import bgImage1 from '../assets/wpsContact.JPG';
-import bgImage2 from '../assets/wpsProducts.JPG';
 import { withStyles } from '@material-ui/core';
 
 const styles = theme => ({
@@ -40,7 +39,7 @@ const styles = theme => ({
       marginTop: "50px",
       marginBottom: "50px",
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'row',
       zIndex: 2
     },
 
@@ -48,8 +47,17 @@ const styles = theme => ({
       display: 'flex',
       flexDirection: 'column',
       verticalAlign: 'middle',
+      margin: 'auto',
       textAlign: 'center',
       color: '#8BD6AE'
+    },
+
+    cartFill: {
+      display: 'flex',
+      flexDirection: 'column',
+      verticalAlign: 'middle',
+      textAlign: 'center',
+      color: '#122F54'
     },
 
     box: {
@@ -59,7 +67,10 @@ const styles = theme => ({
 
     buttonBox: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
+        float: 'right',
+        margin: 'auto',
+        height: '100%',
         verticalAlign: 'middle',
         justifyContent: 'space-evenly',
     },
@@ -96,18 +107,20 @@ class Cart extends Component{
                    
                     <li className={classes.card} key={products.id}>
                             <div className={classes.cardFill}>
-                                <div className="item-img"> 
+                                <div> 
                                         <img 
                                         src={products.image} 
                                         alt={products.image} 
                                         className={classes.cardImg}/>
                                     </div>
-                                    <span className="title">{products.name}</span>
+                                    <span>{products.name}</span>
                                     <p><b>Price: {products.price}$</b></p> 
                                     <p>
                                         <b>Quantity: {products.quantity}</b> 
                                     </p>
-                                    <div className={classes.buttonBox}>
+                                    
+                                </div>
+                                <div className={classes.buttonBox}>
                                       <IconButton onClick={()=>{this.handleAddQuantity(products.id)}} className={classes.button}>
                                           <ArrowDropUpIcon/>
                                       </IconButton>
@@ -118,7 +131,6 @@ class Cart extends Component{
                                           <HighlightOffIcon/>
                                       </IconButton>
                                     </div>
-                                </div>
                                 
                            </li>                        
                 )
@@ -126,16 +138,17 @@ class Cart extends Component{
         ):
 
              (
-                <p>Nothing.</p>
+                <p className={classes.cartFill}>Nothing.</p>
              )
        return(
-            <div className="container">
-                <div className="cart">
-                    <h5>You have ordered:</h5>
-                    <ul className="collection">
+            <div>
+                <div>
+                    <h1 className={classes.cartFill}>Orders:</h1>
+                    <ul>
                         {addedItems}
                     </ul>
-                </div>      
+                </div>     
+                <Shipping /> 
             </div>
        )
     }
