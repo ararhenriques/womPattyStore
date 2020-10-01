@@ -11,178 +11,70 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Menu from './menu';
+import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import {removeFromCart, subQuantity, addQuantity, toggleMenu} from '../actions/actions';
+import {removeFromCart, subQuantity, addQuantity} from '../actions/actions';
+import { TableBody } from '@material-ui/core';
+import bgImage from '../assets/wpsHome.JPG';
+import bgImage1 from '../assets/wpsContact.JPG';
+import bgImage2 from '../assets/wpsProducts.JPG';
+import logo from '../assets/wompattyLogo.png'
 
 const styles = theme => ({
     root: {
       flexGrow: 1,
+    },
+    navLink: {
+      textDecoration: 'none',
+      margin: '5px',
+      color: '#122F54'
+    },
+    navBar: {
+      backgroundColor: '#DD00AE'
     },
     menuButton: {
       marginRight: theme.spacing(2),
     },
     title: {
       flexGrow: 1,
+      color: '#122F54'
     },
+    navImg: {
+      height: "7%",
+      width: "7%"
+    }
   });
 
  class Navbar extends Component{
-
-  // classes = useStyles();
-
-  handleClick = (event) => {
-    this.props.toggleMenu(event)
-  };
-
-  handleClose = () => {
-    this.setState({anchorEl: null});
-  };
-
-  handleRemove = (id) =>{
-    this.props.removeFromCart(id)
-  };
-
-  handleSubQuantity = (id) =>{
-    this.props.subQuantity(id)
-  };
-
-  handleAddQuantity = (id) =>{
-    this.props.addQuantity(id)
-  };
+   state = {
+     anchorEl: null
+   };
 
   render(){
 
     const { classes } = this.props;
 
-    const { anchorEl } = this.setState;
-
-    let addedItems = this.props.products.length ?
-  (
-      this.props.products.map(products=>{
-          return(
-
-              <li className="collection-item avatar" key={products.id}>
-
-                          <div className="item-desc">
-                              <span className="title">{products.name}</span>
-                              <p><b>Price: {products.price}$</b></p>
-                              <p>
-                                  <b>Quantity: {products.quantity}</b>
-                              </p>
-                              <div className="add-remove">
-                                <IconButton >
-<<<<<<< HEAD
-                                    <ArrowDropUpIcon onClick={()=>{handleAddQuantity(products.id)}} />
-                                </IconButton>
-                                <IconButton onClick={()=>{handleSubQuantity(products.id)}}>
-                                    <ArrowDropDownIcon />
-                                </IconButton>
-                              </div>
-                                <IconButton onClick={()=>{handleRemove(products.id)}}>
-=======
-                                    <ArrowDropUpIcon onClick={() => {this.handleAddQuantity(products.id)}} />
-                                </IconButton>
-                                <IconButton onClick={() => {this.handleSubQuantity(products.id)}}>
-                                    <ArrowDropDownIcon />
-                                </IconButton>
-                              </div>
-                                <IconButton onClick={() => {this.handleRemove(products.id)}}>
->>>>>>> menu
-                                    <HighlightOffIcon />
-                                </IconButton>
-                          </div>
-
-                     </li>
-          )
-      })
-  ):
-
-   (
-      <p>Nothing.</p>
-   )
-// return(
-//   <div className="container">
-//       <div className="cart">
-//           <h5>You have ordered:</h5>
-//           <ul className="collection">
-//               {addedItems}
-//           </ul>
-//       </div>
-//   </div>
-// )
-
     return(
-            // <nav className="nav-wrapper">
-            //     <div className="container">
-            //         <Link to="/" className="brand-logo">LOGO HERE</Link>
 
-            //         <ul className="right">
-            //             <li><Link to="/">Home</Link></li>
-            //             <li><Link to="/products">Products</Link></li>
-            //             <li><Link to="/contact">Contact</Link></li>
-            //             {/* dropdown? */}
-            //             <li><ShoppingCartIcon to=""><i className="material-icons">ShoppingCartIcon</i></ShoppingCartIcon></li>
-            //         </ul>
-            //     </div>
-            // </nav>
-            <div className={classes.root}>
-      <AppBar position="static">
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.navBar}>
         <Toolbar>
+        <img 
+        src={logo}
+        className={classes.navImg}/>
           <Typography variant="h6" className={classes.title}>
             WOM! Patties
           </Typography>
-          <Typography variant="h6"><Link to="/" > Home </Link></Typography>
-          <Typography variant="h6"><Link to="/products"> Products </Link></Typography>
-          <Typography variant="h6"><Link to="/contact"> Contact </Link></Typography>
-          <IconButton onClick={() => {this.handleClick()}}
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-haspopup="true"
-            aria-owns= {anchorEl ? "simple-menu": null}
-            aria-label="menu">
-            <ShoppingCartIcon />
-          </IconButton>
+          <Typography variant="h6" ><Link to="/" className={classes.navLink}> Home </Link></Typography><br />
+          <Typography variant="h6" ><Link to="/products" className={classes.navLink}> Products </Link></Typography><br />
+          <Typography variant="h6" ><Link to="/cart" className={classes.navLink}> Cart </Link></Typography><br />
+          <Typography variant="h6" ><Link to="/contact" className={classes.navLink}> Contact </Link></Typography><br />
         </Toolbar>
       </AppBar>
-
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={()=>{this.handleClose()}}
-      >
-        <div>
-            <div>
-                <h5>You have ordered:</h5>
-                <ul>
-                    {addedItems}
-                </ul>
-            </div>
-        </div>
-      </Menu>
 
     </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        products: state.addedItems,
-        anchorEl: state.anchorEl
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return{
-        removeFromCart: (id)=> {dispatch(removeFromCart(id))},
-        addQuantity: (id)=> {dispatch(addQuantity(id))},
-        subQuantity: (id)=> {dispatch(subQuantity(id))},
-        toggleMenu: (event)=> {dispatch(toggleMenu(event))}
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Navbar));
+export default (withStyles(styles)(Navbar));

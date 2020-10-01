@@ -4,8 +4,8 @@ import {REMOVE_FROM_CART } from '../actions/actionTypes';
 import { ADD_QUANTITY } from '../actions/actionTypes';
 import { SUB_QUANTITY } from '../actions/actionTypes';
 import { EMPTY_CART } from '../actions/actionTypes';
-import { TOGGLE_MENU } from '../actions/actionTypes';
-import products from '../components/products';
+import { ADD_SHIPPING } from '../actions/actionTypes';
+
 
 const initialState = {
     products: [{
@@ -13,7 +13,7 @@ const initialState = {
         "name": "Beef Patty",
         "image": ItemPic,
         "price": 12,
-        "quantity": 1,
+        "quantity": 0,
         "selected": false
     },
     {
@@ -21,29 +21,28 @@ const initialState = {
         "name": "Chicken Patty",
         "image": ItemPic,
         "price": 12,
-        "quantity": 1,
+        "quantity": 0,
         "selected": false
     },
     {
         "id": 3,
-        "name": "Chicken and Cheese Patty",
+        "name": "Chicken & Cheese Patty",
         "image": ItemPic,
         "price": 14,
-        "quantity": 1,
+        "quantity": 0,
         "selected": false
     }
 ],
     addedItems: [],
     total: 0,
-    anchorEl: null,
-    anchorReference: 'anchorEl',
     searchNodes: ""
   };
   const allReducer = (state = initialState, action) => {
-    //switch (action.type) {
       if(action.type === ADD_TO_CART){
-        let addedItem = state.products.find(products => products.id === action.id);
-        let existingItem = state.addedItems.find(products => action.id === products.id);
+        let addedItem = state.products.find(product => product.id === action.id);
+        let existingItem = state.addedItems.find(product => action.id === product.id);
+        console.log(addedItem);
+        console.log(action.id);
         if(existingItem)
          {
             addedItem.quantity += 1
@@ -54,7 +53,6 @@ const initialState = {
         }
          else{
             addedItem.quantity = 1;
-            //calculating the total
             let newTotal = state.total + addedItem.price
 
             return{
@@ -81,9 +79,11 @@ const initialState = {
         let addedQItem = state.products.find(products=> products.id === action.id)
         addedQItem.quantity += 1
           let newTotal = state.total + addedQItem.price
+          let newItems = [...state.products]
           return{
               ...state,
-              total: newTotal
+              total: newTotal,
+              addedItems: newItems
           };
       }
       if(action.type === SUB_QUANTITY){
@@ -102,7 +102,8 @@ const initialState = {
           let newTotal = state.total - addedSItem.price
           return{
               ...state,
-              total: newTotal
+              total: newTotal,
+               quantity: addedSItem.quantity
           };
         }
       }
@@ -116,15 +117,24 @@ const initialState = {
           ),
         };
       }
-      if(action.type === TOGGLE_MENU){
-        let anchor = state.anchorEl
-        let anchorToggle = !anchor
-        return {
-          ...state,
-            anchorEl: anchorToggle
+
+      if(action.type=== ADD_SHIPPING){
+        return{
+            ...state,
+            total: state.total + 4
         }
       }
+
+      if(action.type=== 'SUB_SHIPPING'){
+          return{
+              ...state,
+              total: state.total - 4
+          }
+      }
+
+      else {
         return state;
+    }
   };
 
   export default allReducer;

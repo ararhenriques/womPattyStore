@@ -9,22 +9,55 @@ import Navbar from "./components/navbar";
 import Products from "./components/products";
 import Contact from "./components/contact";
 import Home from "./components/home";
+import Cart from "./components/cart";
+import { withStyles } from '@material-ui/core/styles';
+import bgImage from './assets/wpsHome.JPG';
+import bgImage1 from './assets/wpsContact.JPG';
+import bgImage2 from './assets/wpsProducts.JPG';
+
+
+const styles = theme => ({
+  
+  root: {
+    flexGrow: 1,
+    display: 'block'
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  app: {
+    display: 'block'
+
+  },
+
+});
 
 class App extends Component {
+
+
   render() {
+//  <div style={{backgroundImage: `url(require(${bgImage1}))`}}></div>
+    const { classes } = this.props;
+
     return(
       <Router>
-        <div className="App">
-          <Navbar />
-            <Switch>
+        <div className="root">
+          <div className="app">
+            <Navbar />
+            <Switch >
               <Route exact path="/" component={Home}/>
               <Route exact path="/products" component={Products}/>
+              <Route exact path="/cart" component={Cart}/>
               <Route exact path="/contact" component={Contact}/>
             </Switch>
+          </div>
         </div>
       </Router>
   );
 };
 }
 
-export default App;
+export default (withStyles(styles)(App));

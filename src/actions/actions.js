@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, SUB_QUANTITY, EMPTY_CART, ADD_QUANTITY, TOGGLE_MENU } from "./actionTypes";
+import { ADD_TO_CART, REMOVE_FROM_CART, SUB_QUANTITY, EMPTY_CART, ADD_QUANTITY, ADD_SHIPPING } from "./actionTypes";
 
 export const addToCart = (id) => {
     return {
@@ -28,11 +28,5 @@ export const emptyCart = (id) => {
     return {
         type: EMPTY_CART,
         id
-    };
-};
-export const toggleMenu = (event) => {
-    return {
-        type: TOGGLE_MENU,
-        event
     };
 };
